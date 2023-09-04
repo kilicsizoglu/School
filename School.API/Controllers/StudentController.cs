@@ -1,6 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.AspNetCore.Mvc;
 using School.API.Data;
 using School.API.Models;
 
@@ -77,32 +75,8 @@ namespace School.API.Controllers
             }
             else
             {
-                Student? student = schoolDbContext.students.ToList().FirstOrDefault(x => x.Id == response.student.Id);
-                if (student == null)
-                {
-                    return Ok("reject");
-                }
-                else
-                {
-                    if (student == null)
-                    {
-                        return Ok("reject");
-                    }
-                    else if (student != null)
-                    {
-                        Student? student1 = schoolDbContext.students.ToList().FirstOrDefault(x => x.Id == response.student.Id);
-                        if (student1 == null)
-                        {
-                            return Ok("reject");
-                        }
-                        else
-                        {
-                            schoolDbContext.students.Update(response.student);
-                            return Ok("ok");
-                        }
-                    }
-                    return Ok("reject");
-                }
+                schoolDbContext.students.Update(response.student);
+                return Ok("ok");
             }
         }
     }
